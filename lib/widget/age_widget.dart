@@ -12,6 +12,8 @@ class Age extends StatelessWidget {
     return Column(
       children: [
         Text('age:${context.select<Dog, int>((Dog dog) => dog.age)}'),
+        SizedBox(height: 10),
+        Text('nember of babies: ${context.watch<int>()}'),
         SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {

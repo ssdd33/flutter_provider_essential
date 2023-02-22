@@ -14,7 +14,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('provider05')),
+      appBar: AppBar(title: Text('provider06')),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

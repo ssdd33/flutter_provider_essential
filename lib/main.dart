@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_provider/models/babies.dart';
 import 'package:flutter_provider/models/dog.dart';
 import 'package:flutter_provider/screen/home_screen.dart';
 import 'package:provider/provider.dart';
@@ -13,10 +14,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('myapp build');
-    return ChangeNotifierProvider<Dog>(
-      create: (context) => Dog(name: 'dog05', breed: 'breed05', age: 3),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<Dog>(
+          create: (context) => Dog(name: 'dog06', breed: 'breed06', age: 3),
+        ),
+        FutureProvider<int>(
+            initialData: 0,
+            create: (context) {
+              final dogAge = context.read<Dog>().age;
+              final babies = Babies(age: dogAge);
+              return babies.getBabies();
+            })
+      ],
       child: MaterialApp(
-        title: 'provider05',
+        title: 'provider06',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
