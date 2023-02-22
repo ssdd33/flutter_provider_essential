@@ -9,11 +9,16 @@ class Age extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('age build');
     return Column(
       children: [
         Text('age:${context.select<Dog, int>((Dog dog) => dog.age)}'),
         SizedBox(height: 10),
         Text('nember of babies: ${context.watch<int>()}'),
+        SizedBox(
+          height: 10,
+        ),
+        Text('${context.watch<String>()}'),
         SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {
