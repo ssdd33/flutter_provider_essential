@@ -14,15 +14,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('provider08')),
-      body: Consumer<Dog>(
-        builder: (BuildContext context, Dog dog, Widget? child) {
+      appBar: AppBar(title: Text('provider10')),
+      body: Selector<Dog, String>(
+        selector: (BuildContext context, Dog dog) => dog.name,
+        builder: (BuildContext context, String name, Widget? child) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               child!,
               SizedBox(height: 10),
-              Text('name: ${dog.name}'),
+              Text('name: $name'),
               BreedAndAge(),
             ],
           );

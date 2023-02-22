@@ -11,14 +11,16 @@ class BreedAndAge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<Dog>(builder: (_, Dog dog, __) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('breed:${dog.breed}'),
-          Age(),
-        ],
-      );
-    });
+    return Selector<Dog, String>(
+        selector: (BuildContext context, Dog dog) => dog.breed,
+        builder: (_, String breed, __) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('breed:$breed'),
+              Age(),
+            ],
+          );
+        });
   }
 }
