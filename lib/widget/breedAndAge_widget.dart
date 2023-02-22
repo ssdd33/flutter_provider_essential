@@ -14,10 +14,7 @@ class BreedAndAge extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('breed:${Provider.of<Dog>(
-          context,
-          listen: false,
-        ).breed}'),
+        Text('breed:${context.select<Dog, String>((Dog dog) => dog.breed)}'),
         Age(),
       ],
     );

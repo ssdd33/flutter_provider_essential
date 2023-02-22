@@ -11,14 +11,11 @@ class Age extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('age:${Provider.of<Dog>(context).age}'),
+        Text('age:${context.select<Dog, int>((Dog dog) => dog.age)}'),
         SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {
-            Provider.of<Dog>(
-              context,
-              listen: false,
-            ).grow();
+            context.read<Dog>().grow();
           },
           child: Text('grow'),
         ),
