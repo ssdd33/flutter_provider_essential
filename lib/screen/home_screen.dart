@@ -14,13 +14,20 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('provider05')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('name: ${context.watch<Dog>().name}'),
-          BreedAndAge(),
-        ],
+      appBar: AppBar(title: Text('provider08')),
+      body: Consumer<Dog>(
+        builder: (BuildContext context, Dog dog, Widget? child) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              child!,
+              SizedBox(height: 10),
+              Text('name: ${dog.name}'),
+              BreedAndAge(),
+            ],
+          );
+        },
+        child: Text('i love dog'),
       ),
     );
   }

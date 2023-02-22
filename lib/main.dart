@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     print('myapp build');
     return ChangeNotifierProvider<Dog>(
-      create: (context) => Dog(name: 'dog05', breed: 'breed05', age: 3),
+      create: (context) => Dog(name: 'dog08', breed: 'breed08', age: 3),
       child: MaterialApp(
-        title: 'provider05',
+        title: 'provider08',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

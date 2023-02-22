@@ -9,17 +9,19 @@ class Age extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text('age:${context.select<Dog, int>((Dog dog) => dog.age)}'),
-        SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {
-            context.read<Dog>().grow();
-          },
-          child: Text('grow'),
-        ),
-      ],
-    );
+    return Consumer<Dog>(builder: (_, dog, __) {
+      return Column(
+        children: [
+          Text('age:${dog.age}'),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              dog.grow();
+            },
+            child: Text('grow'),
+          ),
+        ],
+      );
+    });
   }
 }
