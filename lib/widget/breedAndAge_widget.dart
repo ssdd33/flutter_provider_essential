@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_provider/models/dog.dart';
 import 'package:flutter_provider/widget/age_widget.dart';
+import 'package:provider/provider.dart';
 
 class BreedAndAge extends StatelessWidget {
-  final Dog dog;
   const BreedAndAge({
     Key? key,
-    required this.dog,
   }) : super(key: key);
 
   @override
@@ -15,8 +14,11 @@ class BreedAndAge extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('breed:${dog.breed}'),
-        Age(dog: dog),
+        Text('breed:${Provider.of<Dog>(
+          context,
+          listen: false,
+        ).breed}'),
+        Age(),
       ],
     );
   }

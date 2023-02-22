@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_provider/models/dog.dart';
 import 'package:flutter_provider/screen/home_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,12 +12,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'provider03',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    print('myapp build');
+    return ChangeNotifierProvider<Dog>(
+      create: (context) => Dog(name: 'dog04', breed: 'breed04'),
+      child: MaterialApp(
+        title: 'provider04',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: MyHomePage(),
       ),
-      home: MyHomePage(),
     );
   }
 }

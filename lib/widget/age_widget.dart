@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_provider/models/dog.dart';
+import 'package:provider/provider.dart';
 
 class Age extends StatelessWidget {
-  final Dog dog;
   const Age({
     Key? key,
-    required this.dog,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('age:${dog.age}'),
+        Text('age:${Provider.of<Dog>(context).age}'),
         SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {
-            dog.grow();
+            Provider.of<Dog>(
+              context,
+              listen: false,
+            ).grow();
           },
           child: Text('grow'),
         ),
