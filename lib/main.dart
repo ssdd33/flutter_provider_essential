@@ -2,24 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'anonymous Router',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: ChangeNotifierProvider<Counter>(
-          create: (context) => Counter(),
-          builder: (BuildContext context, Widget? _) => MyHomePage(),
-        ));
-  }
+  runApp(MyApp());
 }
 
 class Counter with ChangeNotifier {
@@ -28,6 +11,39 @@ class Counter with ChangeNotifier {
   void increment() {
     count++;
     notifyListeners();
+  }
+}
+
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final Counter _counter = Counter();
+
+  @override
+  void dispose() {
+    _counter.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'anonymous Router',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      routes: {
+        '/': (context) =>
+            ChangeNotifierProvider.value(value: _counter, child: MyHomePage()),
+        '/counter': (context) => ChangeNotifierProvider.value(
+            value: _counter, child: ShowMeCounter()),
+      },
+    );
   }
 }
 
@@ -43,13 +59,7 @@ class MyHomePage extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (CounterContext) => ChangeNotifierProvider.value(
-                        value: context.read<Counter>(), child: ShowMeCounter()),
-                  ),
-                );
+                Navigator.pushNamed(context, '/counter');
               },
               child: Text('show me counter'),
             ),
