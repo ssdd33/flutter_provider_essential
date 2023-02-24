@@ -87,7 +87,7 @@ class MyHomePage extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ProxyProv(),
+                      builder: (context) => ProxyProvProxyProv(),
                     ));
               },
               child: Text(

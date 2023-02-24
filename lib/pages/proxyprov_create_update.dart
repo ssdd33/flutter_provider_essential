@@ -27,11 +27,6 @@ class _ProxyProvCreateUpdateState extends State<ProxyProvCreateUpdate> {
     });
   }
 
-  /*proxyProvider가 update되는 시점
-  * 의존하는 provider가 update 될때,
-  * widget rebuild 될때
-  */
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
