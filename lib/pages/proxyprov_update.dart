@@ -8,14 +8,14 @@ class Translations {
   String get title => 'you clicked $_value times';
 }
 
-class WhyProxyProv extends StatefulWidget {
-  const WhyProxyProv({super.key});
+class ProxyProvUpdate extends StatefulWidget {
+  const ProxyProvUpdate({super.key});
 
   @override
-  State<WhyProxyProv> createState() => _WhyProxyProvState();
+  State<ProxyProvUpdate> createState() => _ProxyProvUpdateState();
 }
 
-class _WhyProxyProvState extends State<WhyProxyProv> {
+class _ProxyProvUpdateState extends State<ProxyProvUpdate> {
   int counter = 0;
 
   void increment() {
@@ -25,15 +25,20 @@ class _WhyProxyProvState extends State<WhyProxyProv> {
     });
   }
 
+  /*proxyProvider가 update되는 시점
+  * 의존하는 provider가 update 될때,
+  * widget rebuild 될때
+  */
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Why proxyProvider'),
+          title: Text('proxyProvider update'),
         ),
         body: Center(
-            child: Provider<Translations>(
-          create: (context) => Translations(counter),
+            child: ProxyProvider0<Translations>(
+          update: (context, translations) => Translations(counter),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
