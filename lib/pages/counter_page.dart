@@ -28,7 +28,7 @@ render cycle
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<Counter>().increment();
-      myCounter = context.read<Counter>().counter + 10;
+      myCounter = context.watch<Counter>().counter + 10;
     });
 
     // Future.delayed(Duration(seconds: 0), () {
