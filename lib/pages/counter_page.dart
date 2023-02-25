@@ -20,7 +20,12 @@ class _CounterPageState extends State<CounterPage> {
     //   myCounter = context.read<Counter>().counter + 10;
     // });
 
-    Future.delayed(Duration(seconds: 0), () {
+    // Future.delayed(Duration(seconds: 0), () {
+    //   context.read<Counter>().increment();
+    //   myCounter = context.read<Counter>().counter + 10;
+    // });
+
+    Future.microtask(() {
       context.read<Counter>().increment();
       myCounter = context.read<Counter>().counter + 10;
     });
