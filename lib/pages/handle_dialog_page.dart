@@ -11,7 +11,31 @@ class HandelDialogPage extends StatefulWidget {
 
 class _HandelDialogPageState extends State<HandelDialogPage> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                content: Text('becareful!'),
+              ));
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (context.read<Counter>().counter == 3) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            content: Text('${context.read<Counter>().counter}'),
+          ),
+        );
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('handle dialog'),
