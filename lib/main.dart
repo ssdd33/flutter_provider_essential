@@ -117,7 +117,7 @@ class MyHomePage extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ChgNotiProv(),
+                      builder: (context) => ChgNotiProvProxyProv(),
                     ));
               },
               child: Text(
