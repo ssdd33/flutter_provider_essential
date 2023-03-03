@@ -34,12 +34,14 @@ class ActiveTodoCount with ChangeNotifier {
 
   void update(TodoList todoList) {
     //update함수는 todoList에 변화가 있을때마다 호출된다.
+    print(todoList.state);
     final int newActiveTodoCount = todoList.state.todos
         .where((Todo todo) => !todo.completed)
         .toList()
         .length;
 
     _state = _state.copyWith(activeTodoCount: newActiveTodoCount);
+    print(state);
     notifyListeners();
   }
 }

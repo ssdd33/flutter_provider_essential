@@ -44,7 +44,7 @@ class TodoList with ChangeNotifier {
     notifyListeners();
   }
 
-  void EditTodo(String id, String todoDesc) {
+  void editTodo(String id, String todoDesc) {
     final newTodos = _state.todos.map((Todo todo) {
       if (todo.id == id) {
         return Todo(
@@ -60,7 +60,7 @@ class TodoList with ChangeNotifier {
     notifyListeners();
   }
 
-  void togleTodo(String id) {
+  void toggleTodo(String id) {
     final newTodos = _state.todos.map((Todo todo) {
       if (todo.id == id) {
         return Todo(
@@ -80,6 +80,7 @@ class TodoList with ChangeNotifier {
     final newTodos = _state.todos.where((Todo t) => t.id != todo.id).toList();
 
     _state = _state.copyWith(todos: newTodos);
+    print(_state);
     notifyListeners();
   }
 }
