@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_provider/constants/constants.dart';
 import 'package:flutter_provider/pages/search_page.dart';
+import 'package:flutter_provider/pages/settings_page.dart';
+import 'package:flutter_provider/providers/temp_settings/temp_settings_providers.dart';
 import 'package:flutter_provider/providers/weather/weather_provider.dart';
 import 'package:flutter_provider/widgets/error_dialog.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +41,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   String _showTemperature(double temperature) {
+    final unit = context.watch<TempSettingsProvider>().state.tempUnit;
+
+    if (unit == TempUnit.fahrenheit) {
+      return ((temperature * 9 / 5) + 32).toStringAsFixed(2) + '℉';
+    }
     return temperature.toStringAsFixed(2) + '℃';
   }
 
@@ -102,7 +109,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              '${state.weather.temp}',
+              _showTemperature(state.weather.temp),
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -111,14 +118,14 @@ class _HomePageState extends State<HomePage> {
             SizedBox(width: 20),
             Column(children: [
               Text(
-                '${state.weather.tempMax}',
+                _showTemperature(state.weather.tempMax),
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
               SizedBox(height: 10),
               Text(
-                '${state.weather.tempMin}',
+                _showTemperature(state.weather.tempMin),
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -181,6 +188,14 @@ class _HomePageState extends State<HomePage> {
               }
             },
             icon: Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return SettingsPage();
+              }));
+            },
+            icon: Icon(Icons.settings),
           ),
         ],
       ),
