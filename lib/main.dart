@@ -4,6 +4,7 @@ import 'package:flutter_provider/pages/home_page.dart';
 import 'package:flutter_provider/providers/providers.dart';
 import 'package:flutter_provider/repositories/weather_repository.dart';
 import 'package:flutter_provider/services/weather_api_services.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
@@ -25,26 +26,19 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        ChangeNotifierProvider<WeatherProvider>(
-          create: (context) => WeatherProvider(
-            weatherRepository: context.read<WeatherRepository>(),
-          ),
+        StateNotifierProvider<WeatherProvider, WeatherState>(
+          create: (context) => WeatherProvider(),
         ),
-        ChangeNotifierProvider<TempSettingsProvider>(
+        StateNotifierProvider<TempSettingsProvider, TempSettingsState>(
           create: (context) => TempSettingsProvider(),
         ),
-        ProxyProvider<WeatherProvider, ThemeProvider>(
-          update: (
-            BuildContext context,
-            WeatherProvider weatherProvider,
-            _,
-          ) =>
-              ThemeProvider(wp: weatherProvider),
+        StateNotifierProvider<ThemeProvider, ThemeState>(
+          create: (context) => ThemeProvider(),
         ),
       ],
       builder: (context, _) => MaterialApp(
         title: 'Weather App',
-        theme: context.watch<ThemeProvider>().state.appTheme == AppTheme.light
+        theme: context.watch<ThemeState>().appTheme == AppTheme.light
             ? ThemeData.light()
             : ThemeData.dark(),
         home: const HomePage(),
