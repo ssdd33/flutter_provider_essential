@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_provider/pages/home_page.dart';
-import 'package:flutter_provider/providers/temp_settings/temp_settings_providers.dart';
-import 'package:flutter_provider/providers/weather/weather_provider.dart';
+import 'package:flutter_provider/providers/providers.dart';
 import 'package:flutter_provider/repositories/weather_repository.dart';
 import 'package:flutter_provider/services/weather_api_services.dart';
 import 'package:provider/provider.dart';
@@ -34,12 +33,18 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<TempSettingsProvider>(
           create: (context) => TempSettingsProvider(),
         ),
-      ],
-      child: MaterialApp(
-        title: 'Weather App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+        ChangeNotifierProxyProvider<WeatherProvider, ThemeProvider>(
+          create: (context) => ThemeProvider(),
+          update: (BuildContext context, WeatherProvider weatherProvider,
+                  ThemeProvider? themeProvider) =>
+              themeProvider!..update(weatherProvider),
         ),
+      ],
+      builder: (context, _) => MaterialApp(
+        title: 'Weather App',
+        theme: context.watch<ThemeProvider>().state.appTheme == AppTheme.light
+            ? ThemeData.light()
+            : ThemeData.dark(),
         home: const HomePage(),
       ),
     );
